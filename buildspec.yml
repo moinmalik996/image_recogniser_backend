@@ -1,8 +1,4 @@
 version: 0.2
-env:
-  variables:
-    PIP_DEFAULT_TIMEOUT: "300"
-    PIP_RETRIES: "5"
 phases:
   pre_build:
     commands:
@@ -13,7 +9,7 @@ phases:
       - export BACKEND_REPO="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/image-recogniser-backend"
   build:
     commands:
-      - docker build --platform linux/arm64 --build-arg PIP_DEFAULT_TIMEOUT=300 --build-arg PIP_RETRIES=5 -t $BACKEND_REPO:latest .
+      - docker build --platform linux/arm64 -t $BACKEND_REPO:latest .
       - docker push $BACKEND_REPO:latest
   post_build:
     commands:
