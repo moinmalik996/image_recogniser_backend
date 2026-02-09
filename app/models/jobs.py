@@ -23,6 +23,7 @@ class NHSJob(BaseModel, table=True):
     closing_date: date
     sponsored: bool
     link: str
+    is_closed: bool = False
 
     user_actions: list["UserJobAction"] = Relationship(back_populates="job")
 
