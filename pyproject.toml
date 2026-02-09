@@ -6,12 +6,14 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "asyncpg>=0.30.0",
+    "alembic>=1.15.0",
     "bcrypt==4.0.1",
     "boto3>=1.40.7",
     "fastapi[all]>=0.116.1",
     "greenlet>=3.2.4",
     "mypy>=1.17.1",
     "passlib[bcrypt]>=1.7.4",
+    "psycopg2-binary>=2.9.9",
     "python-jose>=3.5.0",
     "scalar-fastapi>=1.2.3",
     "sqlmodel>=0.0.24",

@@ -1,12 +1,12 @@
 from contextlib import asynccontextmanager
+import logging
+
 from fastapi import FastAPI
 
-from app.db.session import init_db
-
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def life_span_handeler(app: FastAPI):
-    print("Server starting ***************")
-    await init_db()
+    logger.info("Server starting")
     yield
-    print("server stopped *****************")
+    logger.info("Server stopped")

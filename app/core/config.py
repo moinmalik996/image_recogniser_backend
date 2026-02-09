@@ -36,8 +36,6 @@ class Settings(BaseSettings):
         # Otherwise, build from parameters
         if not all([self.DB_USER, self.DB_PASSWORD, self.DB_NAME]):
             raise ValueError("Database credentials are not properly set")
-        
-        print(f"CORS origins loaded: {settings.CORS_ORIGINS}")
         return (
             f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"

@@ -1,7 +1,7 @@
 from typing import List, Optional, Dict, Any
 from datetime import date, datetime, timedelta
 from fastapi import APIRouter, Depends, Query, HTTPException, status
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import asc, desc
@@ -27,8 +27,7 @@ class JobOut(BaseModel):
     sponsored: bool
     link: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 router = APIRouter()
 
@@ -41,7 +40,7 @@ def format_date(dt: date) -> str:
 @router.get("/all", response_model=Dict[str, Any])
 async def list_jobs(
     sponsored: Optional[bool] = Query(None, description="Filter by sponsorship"),
-    sort: Optional[str] = Query("asc", regex="^(asc|desc)$", description="Sort by closing date: 'asc' or 'desc'"),
+    sort: Optional[str] = Query("asc", pattern="^(asc|desc)$", description="Sort by closing date: 'asc' or 'desc'"),
     search: Optional[str] = Query(None, description="Search by job title"),
     db: AsyncSession = Depends(get_session),
     current_user=Depends(get_current_user),
