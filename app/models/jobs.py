@@ -24,9 +24,7 @@ class NHSJob(BaseModel, table=True):
     sponsored: bool
     link: str
     is_closed: bool = False
-
     user_actions: list["UserJobAction"] = Relationship(back_populates="job")
-
     model_config = {
         "arbitrary_types_allowed": True
     }
